@@ -12,9 +12,11 @@ def test_guest_can_go_to_login_page(browser):
     
     page.go_to_login_page()          # выполняем метод страницы — переходим на страницу логина
     page.should_be_login_link()      # проверяем наличие ссылки на вход
+    
     #------------------------------------
     # Это из LoginPage-----------------
     loginlink = "http://selenium1py.pythonanywhere.com/accounts/login/"
+    
     loginpage = LoginPage(browser, loginlink)
-    loginpage.open()
+    #loginpage.open()
     loginpage.should_be_login_page()            # проверям наличи формы логин-регистрация
