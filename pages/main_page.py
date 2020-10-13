@@ -20,7 +20,7 @@ class MainPage(BasePage):
     def should_be_login_link(self):
         assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented" # поменяли на правильный
         
-class ProductPage(BasePage): 
+class MainProductPage(BasePage): 
         
     def should_be_add_to_basket_link(self):
         assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_BUTTON), "Add to cart link is not presented"
