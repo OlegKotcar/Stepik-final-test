@@ -15,7 +15,7 @@ def test_guest_can_go_to_login_page(browser):
     
     #------------------------------------
     # Это из LoginPage-----------------
-    loginlink = "http://selenium1py.pythonanywhere.com/accounts/login/"
+    loginlink = browser.current_url
     
     loginpage = LoginPage(browser, loginlink)
     #loginpage.open()
