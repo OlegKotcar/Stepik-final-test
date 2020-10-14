@@ -52,7 +52,7 @@ def test_guest_can_go_to_login_page(browser):
 ####urls = [f"{product_base_link}/?promo=offer{no}" for no in range(10)]
 
 
-@pytest.mark.skip                              
+@pytest.mark.skip   # из предыдущего задания                           
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1"])
 #7 - с ошибкой
     
@@ -83,7 +83,7 @@ def test_guest_can_add_product_to_basket(browser, link):
     
     #itempage.should_not_be_success_message() #Упадет с ошибкой т.к. товар добавлен и SUCCESS_MESSAGE есть на странице
   
-
+@pytest.mark.skip   # из предыдущего задания  
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"])
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser, link):    
    
@@ -99,7 +99,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser, 
     #time.sleep(5)
     itempage.should_not_be_success_message() # Проверяем, есть ли сообщение об успехе   
     
-
+@pytest.mark.skip   # из предыдущего задания  
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"])
 def test_guest_cant_see_success_message(browser, link):    
    
@@ -111,7 +111,7 @@ def test_guest_cant_see_success_message(browser, link):
     itempage.should_not_be_success_message() # Проверяем, есть ли сообщение об успехе 
     #time.sleep(5)
       
-
+@pytest.mark.skip   # из предыдущего задания  
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"])
 def test_message_disappeared_after_adding_product_to_basket(browser, link):    
    
@@ -123,13 +123,20 @@ def test_message_disappeared_after_adding_product_to_basket(browser, link):
     mainproductpage.should_be_add_to_basket_link() # Есть кнопка добавить в корзину
     mainproductpage.click_add_to_basket() #Наживаем добавить в корзину
     itempage.should_success_message_diasppeared() # Проверяем, исчезло ли сообщение об успехе
-      
-    
-    
     #time.sleep(5)
       
 
+@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"])
+def test_guest_should_see_login_link_on_product_page(browser, link):
+    page = MainProductPage(browser, link)
+    page.open()
+    page.should_be_login_link()
 
-
+@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"])
+def test_guest_can_go_to_login_page_from_product_page(browser, link):
+    page = MainProductPage(browser, link)
+    page.open()
+    page.should_be_login_link()
+    page.go_to_login_page()
 
 

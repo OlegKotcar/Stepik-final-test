@@ -7,6 +7,7 @@ from .login_page import LoginPage
 
 
 class MainPage(BasePage): 
+    '''
     def go_to_login_page(self):
         login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
         login_link.click()
@@ -19,7 +20,16 @@ class MainPage(BasePage):
         
     def should_be_login_link(self):
         assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented" # поменяли на правильный
-
+    '''
+    #Поставили заглушку, т.к. все вынесли в BasePage и locators
+    def __init__(self, *args, **kwargs):
+        super(MainPage, self).__init__(*args, **kwargs)
+        
+    #Можно еще короче
+    # class MainPage(BasePage):
+    #pass    
+        
+    
         
 class MainProductPage(BasePage): 
         
