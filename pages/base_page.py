@@ -1,6 +1,7 @@
 import math
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoAlertPresentException
 
 
 class BasePage():
