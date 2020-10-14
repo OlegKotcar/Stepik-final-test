@@ -22,7 +22,7 @@ def test_guest_can_go_to_login_page(browser):
     loginpage = LoginPage(browser, loginlink)
     #loginpage.open()
     loginpage.should_be_login_page()            # проверям наличи формы логин-регистрация
-'''
+
 
 
 
@@ -44,7 +44,7 @@ def test_guest_can_go_to_login_page(browser):
 #                                  "okay_link"])
 
 
-
+'''
 
 
 
@@ -52,8 +52,8 @@ def test_guest_can_go_to_login_page(browser):
 ####urls = [f"{product_base_link}/?promo=offer{no}" for no in range(10)]
 
 
-                               
-#@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7"])
+@pytest.mark.skip                              
+@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1"])
 #7 - с ошибкой
     
 def test_guest_can_add_product_to_basket(browser, link):
@@ -66,21 +66,70 @@ def test_guest_can_add_product_to_basket(browser, link):
     
     
     mainproductpage = MainProductPage(browser, link)
-    mainproductpage.open()
-    mainproductpage.should_be_add_to_basket_link()
-    mainproductpage.click_add_to_basket()
-    mainproductpage.solve_quiz_and_get_code()  # Нужен алерт для этого метода
-    #time.sleep(25)
-    
-    
     itempage = ProductPage(browser, browser.current_url)
-    itempage.should_add_to_basket()
+    
+    mainproductpage.open()  #Открываем страницу товара
+    itempage.should_not_be_success_message() # проверяем что нет сообщения о добавлении в корзину(мы только вошли на страницу) 4 сек. ожидание по-умолчанию
     
     
+    mainproductpage.should_be_add_to_basket_link() # Есть кнопка добавить в корзину
     
+    mainproductpage.click_add_to_basket() #Наживаем добавить в корзину
+    mainproductpage.solve_quiz_and_get_code()  # Нужен алерт для этого метода - решаем, вставляем значение 
+    time.sleep(5)
+        
     
+    itempage.should_be_proper_item() # проверяем что в корзину добавлен правильный товар
+    
+    #itempage.should_not_be_success_message() #Упадет с ошибкой т.к. товар добавлен и SUCCESS_MESSAGE есть на странице
+  
+
+@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"])
+def test_guest_cant_see_success_message_after_adding_product_to_basket(browser, link):    
+   
+    
+    mainproductpage = MainProductPage(browser, link)
+    itempage = ProductPage(browser, browser.current_url)
+    
+    mainproductpage.open() #Открываем страницу товара
+    mainproductpage.should_be_add_to_basket_link() # Есть кнопка добавить в корзину
+    
+    mainproductpage.click_add_to_basket() #Наживаем добавить в корзину
+    
+    #time.sleep(5)
+    itempage.should_not_be_success_message() # Проверяем, есть ли сообщение об успехе   
     
 
+@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"])
+def test_guest_cant_see_success_message(browser, link):    
+   
+    
+    mainproductpage = MainProductPage(browser, link)
+    itempage = ProductPage(browser, browser.current_url)
+    
+    mainproductpage.open()  #Открываем страницу товара
+    itempage.should_not_be_success_message() # Проверяем, есть ли сообщение об успехе 
+    #time.sleep(5)
+      
 
-# -----------
+@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/"])
+def test_message_disappeared_after_adding_product_to_basket(browser, link):    
+   
+    
+    mainproductpage = MainProductPage(browser, link)
+    itempage = ProductPage(browser, browser.current_url)
+    
+    mainproductpage.open()  #Открываем страницу товара
+    mainproductpage.should_be_add_to_basket_link() # Есть кнопка добавить в корзину
+    mainproductpage.click_add_to_basket() #Наживаем добавить в корзину
+    itempage.should_success_message_diasppeared() # Проверяем, исчезло ли сообщение об успехе
+      
+    
+    
+    #time.sleep(5)
+      
+
+
+
+
 

@@ -1,7 +1,13 @@
 import math
 from selenium.webdriver import Remote as RemoteWebDriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Import Exceptions
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import TimeoutException
+
 
 
 class BasePage():
@@ -10,7 +16,7 @@ class BasePage():
         #def __init__(self, browser, url):
         self.browser = browser
         self.url = url
-        self.browser.implicitly_wait(timeout)
+        #self.browser.implicitly_wait(timeout) #- закомменчено т.к. ждем появления элемента явно
     
     def is_element_present(self, how, what):
         try:
@@ -19,8 +25,28 @@ class BasePage():
             return False
         return True
     
+    def is_not_element_present(self, how, what, timeout=4): #Резюмируя, можно сказать, что разрабатывать такие проверки нужно очень аккуратно, использовать явные ожидания для сокращения времени прогона теста и всегда добавлять позитивную проверку на элемент в другом тесте. Без явной необходимости таких проверок лучше избегать. 
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+
+        return False
+ 
+    def is_disappeared(self, how, what, timeout=4): #Резюмируя, можно сказать, что разрабатывать такие проверки нужно очень аккуратно, использовать явные ожидания для сокращения времени прогона теста и всегда добавлять позитивную проверку на элемент в другом тесте. Без явной необходимости таких проверок лучше избегать. 
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+
+        return True
+ 
+    
+    
+    
     def open(self):
         self.browser.get(self.url)
+        
     
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert

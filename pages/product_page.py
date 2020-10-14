@@ -9,12 +9,11 @@ class ProductPage(BasePage):
         
         self.should_be_login_url()
         self.should_be_login_form()
-
+        
     #@pytest.mark.skip
     
     def should_be_proper_item(self):
         ###assert "The shellcoder's handbook" in self.browser.title, "Incorrect product item"
-        
         
         #itemtext = self.browser.find_element(*ProductPageLocators.ITEM_NAME).text
         #assert "The shellcoder's handbook" in itemtext, "Incorrect product name"
@@ -26,10 +25,22 @@ class ProductPage(BasePage):
         addeditemtext = self.browser.find_element(*ProductPageLocators.ADDED_ITEM_NAME).text
         assert addeditemtext == itemtext, "Wrong item added to basket"
         #assert True
+
+    def should_not_be_success_message(self):
         
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"
+        #assert True 
+
+    def should_success_message_diasppeared(self):
+        
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is not disappeared, but should be"
+        #assert True 
+ 
+ 
+ 
       
 
-# Нижк заготовки под проверки      
+# Ниже заготовки под проверки      
 
     def should_be_login_url(self):
         # реализуйте проверку на корректный url адрес
@@ -41,22 +52,4 @@ class ProductPage(BasePage):
         # реализуйте проверку, что есть форма логина
         ###assert self.is_element_present(*LoginPageLocators.LOGIN_FORM), "Login form is not presented"
         assert True
-
-#The shellcoder's handbook has been added to your basket.
-#div.alertinner
-
-
-
-
-'''
-
-class ProductPage(BasePage): 
-
-    def should_be_login_link(self):
-        assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented" # поменяли на правильный
-        
-    def click_add_tobasket(self):
-        login_link = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_LINK)
-        login_link.click()
-'''
 
