@@ -36,3 +36,27 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser, link):
     #time.sleep(5)
 
 
+@pytest.mark.login_guest
+class TestLoginFromMainPage():
+    # не забываем передать первым аргументом self                       
+    @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"])
+    def test_guest_can_go_to_login_page(self, browser, link):     
+        page = MainPage(browser, link)   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        page.open()                      # открываем страницу
+    
+        page.go_to_login_page()          # выполняем метод страницы — переходим на страницу логина
+        page.should_be_login_link()      # проверяем наличие ссылки на вход
+    
+        loginlink = browser.current_url
+    
+        loginpage = LoginPage(browser, loginlink)
+    
+        loginpage.should_be_login_page()            # проверям наличи формы логин-регистрация
+
+    @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"])
+    def test_guest_should_see_login_link(self, browser,link):
+        page = MainPage(browser, link)
+        page.open()
+        #time.sleep(5)
+        page.should_be_login_link()
+        

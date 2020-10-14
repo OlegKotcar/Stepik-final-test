@@ -7,6 +7,10 @@ class MainPageLocators():
 class LoginPageLocators():
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
     REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
+    REGISTER_BUTTON = (By.NAME, "registration_submit")
+    EMAIL = (By.NAME, "registration-email")
+    PASSWORD1 = (By.NAME, "registration-password1")
+    PASSWORD2 = (By.NAME, "registration-password2")
     
 class ProductPageLocators():
     ADD_TO_BASKET_BUTTON = (By.CSS_SELECTOR, "button.btn-add-to-basket")
@@ -21,3 +25,4 @@ class BasePageLocators():
     BASKET_LINK = (By.CSS_SELECTOR, ".basket-mini .btn-group a.btn-default") # ".basket-mini .btn-group a.btn-default"
     EMPTY_BASKET_TAG = (By.CSS_SELECTOR, "#content_inner > p")
     NOT_EMPTY_BASKET_TAG = (By.CSS_SELECTOR, ".basket-items")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
