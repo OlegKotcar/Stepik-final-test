@@ -2,6 +2,7 @@ import time, pytest
 #from pages.main_page import MainPage # иногда в начале нужна точка
 from pages.main_page import MainProductPage
 from pages.product_page import ProductPage # иногда в начале нужна точка
+from pages.basket_page import BasketPage
 
 '''
 def test_guest_can_go_to_login_page(browser):
@@ -125,13 +126,14 @@ def test_message_disappeared_after_adding_product_to_basket(browser, link):
     itempage.should_success_message_diasppeared() # Проверяем, исчезло ли сообщение об успехе
     #time.sleep(5)
       
-
+@pytest.mark.skip   # из предыдущего задания  
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"])
 def test_guest_should_see_login_link_on_product_page(browser, link):
     page = MainProductPage(browser, link)
     page.open()
     page.should_be_login_link()
 
+@pytest.mark.skip   # из предыдущего задания  
 @pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"])
 def test_guest_can_go_to_login_page_from_product_page(browser, link):
     page = MainProductPage(browser, link)
@@ -140,3 +142,18 @@ def test_guest_can_go_to_login_page_from_product_page(browser, link):
     page.go_to_login_page()
 
 
+@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"])
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser, link):
+    page = MainProductPage(browser, link)
+    basketpage=BasketPage(browser, browser.current_url)
+    
+    page.open()
+    page.should_be_basket_link()
+    page.go_to_basket_page()
+    basketpage.should_be_no_items_in_basket()
+
+#---------------------
+
+
+
+    

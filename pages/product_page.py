@@ -7,8 +7,6 @@ class ProductPage(BasePage):
     def should_add_to_basket(self):
         self.should_be_proper_item()
         
-        self.should_be_login_url()
-        self.should_be_login_form()
         
     #@pytest.mark.skip
     
@@ -39,17 +37,4 @@ class ProductPage(BasePage):
  
  
       
-
-# Ниже заготовки под проверки      
-
-    def should_be_login_url(self):
-        # реализуйте проверку на корректный url адрес
-        ###print(self.browser.current_url)
-        ###assert "login" in self.browser.current_url, "Login URL is not correct"
-        assert True
-
-    def should_be_login_form(self):
-        # реализуйте проверку, что есть форма логина
-        ###assert self.is_element_present(*LoginPageLocators.LOGIN_FORM), "Login form is not presented"
-        assert True
 

@@ -1,7 +1,10 @@
-import time
+import time, pytest
 from pages.main_page import MainPage # иногда в начале нужна точка
 from pages.login_page import LoginPage # иногда в начале нужна точка
+from pages.basket_page import BasketPage
 
+
+@pytest.mark.skip 
 def test_guest_can_go_to_login_page(browser):
     link = "http://selenium1py.pythonanywhere.com/" #Рабочий линк
     
@@ -20,3 +23,16 @@ def test_guest_can_go_to_login_page(browser):
     loginpage = LoginPage(browser, loginlink)
     #loginpage.open()
     loginpage.should_be_login_page()            # проверям наличи формы логин-регистрация
+
+ 
+@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"])
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser, link):
+    basketpage = BasketPage(browser, link)
+    basketpage.open()
+    basketpage.should_be_basket_link()
+    basketpage.go_to_basket_page()
+    basketpage.should_be_no_items_in_basket()
+    
+    #time.sleep(5)
+
+
