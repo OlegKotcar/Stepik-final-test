@@ -33,14 +33,21 @@ def test_guest_can_go_to_login_page(browser):
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer4",
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer5",
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer6",
-                                  "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7",
+ # Это линк с ошибкой - пометили как XFail                                 "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7",
+                                  pytest.param("bugged_link", marks=pytest.mark.xfail),
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"])
 
+# Помечаем XFail в параметризации
+#@pytest.mark.parametrize('link', ["okay_link",
+#                                  pytest.param("bugged_link", marks=pytest.mark.xfail),
+#                                  "okay_link"])
 
 
 
-#!!!!!!!!!!
+
+
+
 #product_base_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
 ####urls = [f"{product_base_link}/?promo=offer{no}" for no in range(10)]
 
@@ -53,10 +60,8 @@ def test_guest_can_add_product_to_basket(browser, link):
 #def test_guest_can_add_product_to_basket(browser):
     
     #browser.delete_all_cookies()  # очистка кукисов
-    
-    
+       
     #link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
-    
     #link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
     
     
