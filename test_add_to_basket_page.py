@@ -53,7 +53,7 @@ def test_guest_can_go_to_login_page(browser):
 
 
 @pytest.mark.skip   # из предыдущего задания                           
-@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1"])
+@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/the-city-and-the-stars_95/"])
 #7 - с ошибкой
     
 def test_guest_can_add_product_to_basket(browser, link):
@@ -65,17 +65,14 @@ def test_guest_can_add_product_to_basket(browser, link):
     #link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
     
     
-    mainproductpage = MainProductPage(browser, link)
-    itempage = ProductPage(browser, browser.current_url)
-    
-    mainproductpage.open()  #Открываем страницу товара
+    itempage = ProductPage(browser, link)
+    itempage.open()  #Открываем страницу товара
     itempage.should_not_be_success_message() # проверяем что нет сообщения о добавлении в корзину(мы только вошли на страницу) 4 сек. ожидание по-умолчанию
     
+    itempage.should_be_add_to_basket_link() # Есть кнопка добавить в корзину
+    itempage.click_add_to_basket() #Наживаем добавить в корзину
     
-    mainproductpage.should_be_add_to_basket_link() # Есть кнопка добавить в корзину
-    
-    mainproductpage.click_add_to_basket() #Наживаем добавить в корзину
-    mainproductpage.solve_quiz_and_get_code()  # Нужен алерт для этого метода - решаем, вставляем значение 
+    itempage.solve_quiz_and_get_code()  # Нужен алерт для этого метода - решаем, вставляем значение 
     time.sleep(5)
         
     
@@ -116,12 +113,12 @@ def test_guest_cant_see_success_message(browser, link):
 def test_message_disappeared_after_adding_product_to_basket(browser, link):    
    
     
-    mainproductpage = MainProductPage(browser, link)
-    itempage = ProductPage(browser, browser.current_url)
+    itempage = ProductPage(browser, link)
     
-    mainproductpage.open()  #Открываем страницу товара
-    mainproductpage.should_be_add_to_basket_link() # Есть кнопка добавить в корзину
-    mainproductpage.click_add_to_basket() #Наживаем добавить в корзину
+    itempage.open()  #Открываем страницу товара
+    itempage.should_be_add_to_basket_link() # Есть кнопка добавить в корзину
+    itempage.click_add_to_basket() #Наживаем добавить в корзину
+    
     itempage.should_success_message_diasppeared() # Проверяем, исчезло ли сообщение об успехе
     #time.sleep(5)
       

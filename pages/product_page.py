@@ -7,9 +7,7 @@ class ProductPage(BasePage):
     def should_add_to_basket(self):
         self.should_be_proper_item()
         
-        
-    #@pytest.mark.skip
-    
+            
     def should_be_proper_item(self):
         ###assert "The shellcoder's handbook" in self.browser.title, "Incorrect product item"
         
@@ -34,7 +32,12 @@ class ProductPage(BasePage):
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is not disappeared, but should be"
         #assert True 
  
- 
+    def should_be_add_to_basket_link(self):
+        assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_BUTTON), "Add to cart link is not presented"
+    
+    def click_add_to_basket(self):
+        AddButton = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
+        AddButton.click()
  
       
 
