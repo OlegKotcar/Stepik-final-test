@@ -97,7 +97,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser, 
     
     itempage.click_add_to_basket() #Наживаем добавить в корзину
     
-    time.sleep(5)
+    #time.sleep(5)
     itempage.should_not_be_success_message() # Проверяем, есть ли сообщение об успехе   
     
 @pytest.mark.skip   # из предыдущего задания  
@@ -150,7 +150,7 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser, link
     basketpage.should_be_basket_link()
     basketpage.go_to_basket_page()
     basketpage.should_be_no_items_in_basket()
-    time.sleep(5)
+    #time.sleep(5)
 
 
 @pytest.mark.skip   # проверка регистрации
@@ -219,12 +219,8 @@ class TestUserAddToBasketFromProductPage(object):
     
         itempage.open() #Открываем страницу товара
         itempage.should_not_be_success_message() # проверяем что нет сообщения о добавлении в корзину в самом начале
-        itempage.should_be_add_to_basket_link() # Есть кнопка добавить в корзину
-        itempage.click_add_to_basket() #Нажимаем добавить в корзину
-        itempage.solve_quiz_and_get_code()  # решаем, вставляем значение
+      
         
-        #time.sleep(10)
-        itempage.should_not_be_success_message() # Проверяем, есть ли сообщение об успехе   
 
     def test_user_can_add_product_to_basket(self, browser):
 
